@@ -1,1 +1,5 @@
-# View branches of this repo to follow step by step.
+# First Steps Branch
+
+Start here.
+
+Review store.js, todoSlice.js, TodoList.js and App.js.
