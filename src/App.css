@@ -1,7 +1,68 @@
+html {
+  background-color: rgba(0, 0, 0, 0.87);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden;
+}
 .app-container-div {
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+}
+
+.navigation {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+}
+
+.single-todo-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+}
+
+form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+}
+
+label {
+  margin: 5px;
+  padding: 5px;
+}
+
+input,
+textarea {
+  margin: 5px;
+  padding: 5px;
+  height: 30px;
+  width: 350px;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 4px solid peru;
+}
+
+a {
+  color: peru;
+  margin: 10px;
+}
+
+button {
+  background-color: purple;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
 }

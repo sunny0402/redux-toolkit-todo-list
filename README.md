@@ -5,6 +5,7 @@
 New components:
 Single to-do component
 New Features:
+Add a new to-do.
 Edit to-do item. Such as updating the category.
 Swap the order of to-do items.
 Get to-do items by category.
@@ -22,6 +23,38 @@ After creating the SingleTodoPage component let's add routing to this component 
 ```
     <Route path="/todos/:todoId" element={<SingleTodoPage />} />
 ```
+
+# Add a to-do
+
+First create a form and then connect the form the Redux store.
+
+```
+<Route path="/addTodo" element={<AddTodoForm />} />
+```
+
+In todoSlice.js we need to add a reducer function which will handle saving the to-do to our app state.
+To save, aka update state, we need the current state and an action object which has the new info. The action object will be dispatched by out AddTodoForm component.
+
+Again the UI our component dispatches an action which updates the app state. That's it.
+
+```
+  reducers: {
+    createTodo(state, action) {
+      state.push(action.payload);
+    },
+  },
+```
+
+We have some things to import to our AddTodoForm component.
+
+```
+import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+
+import { createTodo } from "./todoSlice";
+```
+
+# Edit a to-do
 
 <EditPostForm>
 

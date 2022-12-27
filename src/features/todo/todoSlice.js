@@ -13,7 +13,14 @@ const initialTodoData = [
 const todoSlice = createSlice({
   name: "todo",
   initialState: initialTodoData,
-  reducers: {},
+  reducers: {
+    createTodo(state, action) {
+      state.push(action.payload);
+    },
+  },
 });
+
+console.log("todoSlice.js: \n", todoSlice);
+export const { createTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

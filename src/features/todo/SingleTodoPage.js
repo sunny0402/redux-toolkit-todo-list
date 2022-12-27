@@ -17,11 +17,12 @@ export const SingleTodoPage = () => {
     );
   } else {
     return (
-      <section>
-        <article className="todo-article-container" key={theTodo.id}>
-          <h3>{theTodo.tile}</h3>
-          <h4>{theTodo.category}</h4>
-          <p className="todo-note">{theTodo.notes}</p>
+      <section className="single-todo-container">
+        <article key={theTodo.id}>
+          <h3>Title: {theTodo.title}</h3>
+          <h4>Category: {theTodo.category}</h4>
+          <h4>Id: {theTodo.id}</h4>
+          <p className="todo-note">Notes: {theTodo.notes}</p>
         </article>
       </section>
     );
