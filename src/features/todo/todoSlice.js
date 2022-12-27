@@ -17,10 +17,19 @@ const todoSlice = createSlice({
     createTodo(state, action) {
       state.push(action.payload);
     },
+    updateTodo(state, action) {
+      const { id, title, notes, category } = action.payload;
+      const todo2Update = state.find((a_todo) => a_todo.id === id);
+      if (todo2Update) {
+        todo2Update.title = title;
+        todo2Update.notes = notes;
+        todo2Update.category = category;
+      }
+    },
   },
 });
 
 console.log("todoSlice.js: \n", todoSlice);
-export const { createTodo } = todoSlice.actions;
+export const { createTodo, updateTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

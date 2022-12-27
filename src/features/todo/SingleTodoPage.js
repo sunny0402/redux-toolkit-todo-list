@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const SingleTodoPage = () => {
   let params = useParams();
@@ -23,6 +24,7 @@ export const SingleTodoPage = () => {
           <h4>Category: {theTodo.category}</h4>
           <h4>Id: {theTodo.id}</h4>
           <p className="todo-note">Notes: {theTodo.notes}</p>
+          <Link to={`/editTodo/${todoId}`}>Edit this to-do</Link>
         </article>
       </section>
     );

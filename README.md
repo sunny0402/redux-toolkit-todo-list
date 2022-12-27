@@ -54,6 +54,31 @@ import { nanoid } from "@reduxjs/toolkit";
 import { createTodo } from "./todoSlice";
 ```
 
+The important part is that we dispatch an action which updates the Redux store.
+
+```
+  //   update app state by creating a new todo
+  const onSaveTodoClicked = () => {
+    if (title && notes && category) {
+      //   update state
+      dispatch(
+        createTodo({
+          id: nanoid(),
+          title: title,
+          notes: notes,
+          category: category,
+        })
+      );
+      // clear input fields
+      setTitle("");
+      setNotes("");
+      setCategory("");
+    }
+  };
+```
+
+Convince yourself, that this works by visiting dev tools.
+
 # Edit a to-do
 
 <EditPostForm>
@@ -72,19 +97,88 @@ createSlice creates action creators which UI components can dispatch.
 
 Finally, we'll need to export the action creator function that createSlice generated for us, so that the UI can dispatch the new postUpdated action when the user saves the post.
 
-```
-postUpdated(state, action) {
-const { id, title, content } = action.payload
-const existingPost = state.find(post => post.id === id)
-if (existingPost) {
-existingPost.title = title
-existingPost.content = content
-}
-}
+1. todoSlice.js
 
-export const { postAdded, postUpdated } = postsSlice.actions
+```
+    updateTodo(state, action) {
+      const { id, title, notes, category } = action.payload;
+      const todo2Update = state.find((a_todo) => a_todo.id === id);
+      if (todo2Update) {
+        todo2Update.title = title;
+        todo2Update.notes = notes;
+        todo2Update.category = category;
+      }
+    },
+
+    export const { createTodo, updateTodo } = todoSlice.actions;
+```
+
+2. EditTodoForm.js
+
+```
+//add code
+```
+
+3. Update App.js
+
+```
+import { EditTodoForm } from "./features/todo/EditTodoForm";
+<Route path="editTodo/:todoId" element={EditTodoForm} />
+```
+
+4. Update the single to-do component
+
+```
+<Link to={`editTodo/${todoId}`} />
 ```
 
 To edit a post need to retreive right post from Redux store.
 
 ??? We'll also use React Router's history API to switch over to the single post page and show that post.
+
+# Extra Features ...
+
+Color code todos.
+Add a timer to a to-do.
+
+TimeTodo.js
+
+```
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTime } from './timeSlice';
+
+function Time() {
+  const [duration, setDuration] = useState(0); // added this line
+  const time = useSelector(state => state.time.currentTime);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDuration(duration - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [duration]); // added this line
+
+  function handleSetTime(event) {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const newDuration = data.get("duration");
+    setDuration(newDuration);
+  }
+
+  return (
+    <div>
+      <p>The countdown timer is at: {duration} seconds</p>
+      <form onSubmit={handleSetTime}>
+        <label htmlFor="duration">Enter duration in seconds:</label>
+        <input id="duration" name="duration" type="number" />
+        <button type="submit">Set Time</button>
+      </form>
+    </div>
+  );
+}
+
+export default Time;
+```
