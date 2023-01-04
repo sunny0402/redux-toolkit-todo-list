@@ -26,10 +26,14 @@ const todoSlice = createSlice({
         todo2Update.category = category;
       }
     },
+    deleteTodo(state, action) {
+      const { deleteId } = action.payload;
+      return state.filter((a_todo) => a_todo.id !== deleteId);
+    },
   },
 });
 
 console.log("todoSlice.js: \n", todoSlice);
-export const { createTodo, updateTodo } = todoSlice.actions;
+export const { createTodo, updateTodo, deleteTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -134,7 +134,16 @@ import { EditTodoForm } from "./features/todo/EditTodoForm";
 
 To edit a post need to retreive right post from Redux store.
 
-??? We'll also use React Router's history API to switch over to the single post page and show that post.
+Quickly explaint the use of React Router.
+
+# Possible to refactor dispatch
+
+Do this after all features are complete.
+
+Right now our individual components are required to know about all the data to update Redux store.
+Can move this logic to todoSlice.js.
+
+https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
 
 # Extra Features ...
 
