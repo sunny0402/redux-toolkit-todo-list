@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteTodo } from "./todoSlice";
+import { CountDownTimer } from "../timer/CountDownTimer";
 
 export const TodoList = () => {
   const theTodos = useSelector((state) => state.todo);
@@ -21,6 +22,7 @@ export const TodoList = () => {
         View Todo
       </Link>
       <button onClick={() => handleDelete(a_todo.id)}>Delete</button>
+      <CountDownTimer todoId={a_todo.id} />
     </article>
   ));
   return (

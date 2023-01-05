@@ -136,19 +136,81 @@ To edit a post need to retreive right post from Redux store.
 
 Quickly explaint the use of React Router.
 
-# Possible to refactor dispatch
+# Delete Todo
 
-Do this after all features are complete.
+todoSlice.js
 
-Right now our individual components are required to know about all the data to update Redux store.
-Can move this logic to todoSlice.js.
+```
+    deleteTodo(state, action) {
+      const { deleteId } = action.payload;
+      return state.filter((a_todo) => a_todo.id !== deleteId);
+    },
 
-https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
+    ...
+
+    export const { createTodo, updateTodo, deleteTodo } = todoSlice.actions;
+```
+
+TodoList.js
+
+```
+// add imports
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "./todoSlice";
+
+....
+
+//dispatch action
+  const handleDelete = (deleteId) => {
+    dispatch(deleteTodo({ deleteId }));
+  };
+
+...
+
+//update UI
+
+      <button onClick={() => handleDelete(a_todo.id)}>Delete</button>
+
+```
 
 # Extra Features ...
 
-Color code todos.
-Add a timer to a to-do.
+Add a timer to a to-do. Change order of todos. Filter/clear category. Color code todos.
+
+Timer
+
+1. timerSlice.js what data will this slice of app state have and what actions will update it.
+2. Update store.js to reflect the addition of a timer slice to state.
+
+From the docs:
+Redux actions and state should only contain plain JS values like objects, arrays, and primitives. Don't put class instances, functions, or other non-serializable values into Redux!.
+
+3. So let's create a CountDownTimer component. This is a timer feature so in Timer folder.
+
+The CountDownTimer will update the app state via user input. The user can start, pause or delete the timer, so we import these actions from the timerSlice.
+Let's start by testing if we can dispatch the startTimer action.
+
+4. Because later we will sort our todos based on time left to complete let's render our countdown timer in TodoList.js.
+
+From the docs:https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
+Components can combine values from props, state, and the Redux store to determine what UI they need to render. They can read multiple pieces of data from the store, and reshape the data as needed for display.
+
+Go to DevTools then the Redux tab and confirm that time/startTimer action was dispatched.
+
+Now that we can succesfully dipsatch a startTimer action. Let actually run our countdown timer, by dispatching and updateTimer action.
+
+For this we will use the javascript function setInterval.
+
+TodoList.js
+
+```
+import { CountDownTimer } from "../timer/CountDownTimer";
+
+...
+
+<CountDownTimer todoId={a_todo.id} />
+
+```
 
 TimeTodo.js
 
@@ -159,6 +221,7 @@ import { setTime } from './timeSlice';
 
 function Time() {
   const [duration, setDuration] = useState(0); // added this line
+  //get time from seperate slice of state
   const time = useSelector(state => state.time.currentTime);
   const dispatch = useDispatch();
 
@@ -191,3 +254,34 @@ function Time() {
 
 export default Time;
 ```
+
+posts/TimeAgo
+
+```
+import React from 'react'
+import { parseISO, formatDistanceToNow } from 'date-fns'
+
+export const TimeAgo = ({ timestamp }) => {
+  let timeAgo = ''
+  if (timestamp) {
+    const date = parseISO(timestamp)
+    const timePeriod = formatDistanceToNow(date)
+    timeAgo = `${timePeriod} ago`
+  }
+
+  return (
+    <span title={timestamp}>
+      &nbsp; <i>{timeAgo}</i>
+    </span>
+  )
+}
+```
+
+# Possible to refactor dispatch
+
+Do this after all features are complete.
+
+Right now our individual components are required to know about all the data to update Redux store.
+Can move this logic to todoSlice.js.
+
+https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
