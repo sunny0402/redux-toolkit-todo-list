@@ -201,6 +201,15 @@ Now that we can succesfully dipsatch a startTimer action. Let actually run our c
 
 For this we will use the javascript function setInterval.
 
+React Hooks, setInterval and Timer Component: https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
+
+From the docs:https://redux.js.org/tutorials/fundamentals/part-5-ui-react
+Fortunately, useSelector automatically subscribes to the Redux store for us! That way, any time an action is dispatched, it will call its selector function again right away. If the value returned by the selector changes from the last time it ran, useSelector will force our component to re-render with the new data.
+
+From the docs:https://redux.js.org/tutorials/essentials/part-4-using-data
+Put as little info in action as possibel to describe action.
+it's always better to keep the action objects as small as possible, and do the state update calculations in the reducer. This also means that reducers can contain as much logic as necessary to calculate the new state.
+
 TodoList.js
 
 ```

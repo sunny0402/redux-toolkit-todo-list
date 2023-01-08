@@ -9,10 +9,10 @@ const timerSlice = createSlice({
   name: "timer",
   initialState: initialTimerData,
   reducers: {
-    // createTimer(state, action) {},
     startTimer(state, action) {
       const { id, duration } = action.payload;
       const timerToStart = state.find((a_timer) => a_timer.id === id);
+      //update timer if it already exists
       if (timerToStart) {
         timerToStart.duration = duration;
         timerToStart.isRunning = true;
@@ -20,6 +20,19 @@ const timerSlice = createSlice({
         //create new timer
         state.push({ id: id, duration: duration, isRunning: true });
       }
+      //   Test
+      //   const timerToUpdate = state.find((a_timer) => a_timer.id === id);
+      //   let interval = null;
+      //   if (timerToUpdate.duration > 0) {
+      //     interval = setInterval(() => {
+      //       timerToUpdate.duration -= 1;
+      //     }, 1000);
+      //   } else {
+      //     clearInterval(interval);
+      //   }
+
+      //   dispatch(updateTimer(id));
+      //   Test
     },
     updateTimer(state, action) {
       const { id } = action.payload;
@@ -27,6 +40,16 @@ const timerSlice = createSlice({
       if (timerToUpdate && timerToUpdate.isRunning) {
         timerToUpdate.duration -= 1;
       }
+      // Test
+      //   let interval = null;
+      //   if (timerToUpdate && timerToUpdate.isRunningtimerToUpdate.duration > 0) {
+      //     interval = setInterval(() => {
+      //       timerToUpdate.duration -= 1;
+      //     }, 1000);
+      //   } else {
+      //     clearInterval(interval);
+      //   }
+      //   Test
     },
     pauseTimer(state, action) {
       const { id } = action.payload;
