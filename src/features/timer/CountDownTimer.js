@@ -27,6 +27,7 @@ export const CountDownTimer = ({ todoId }) => {
   // Dispatch startTimer if either new timer. Or if timer is already running.
   const onStartTimerClicked = (event) => {
     event.preventDefault();
+
     if (
       inputWeeks.current.value >= 0 &&
       inputDays.current.value >= 0 &&
@@ -49,6 +50,11 @@ export const CountDownTimer = ({ todoId }) => {
     }
   };
 
+  const onDeleteTimerClicked = (event) => {
+    event.preventDefault();
+    dispatch(deleteTimer({ deleteId: todoId }));
+  };
+
   //Note: Dispatch the updateTimer action if timerToRender changes.
   // timerToRender changes if Redux state changes.
   //  Initially Redux state changes because startTimer action dispatched.
@@ -68,10 +74,16 @@ export const CountDownTimer = ({ todoId }) => {
     // }, []);
   }, [timerToRender]);
 
-  //   Note: Reset timer once time remaining is zero.
+  //   Note: Delete timer once timerToRender.timeRemaining.minutes === 0
   useEffect(() => {
-    if (timerToRender?.timeRemaining === 0 && timerToRender?.isRunning) {
-      // reset timer
+    if (
+      timerToRender?.isRunning &&
+      timerToRender?.timeRemaining?.weeks === 0 &&
+      timerToRender?.timeRemaining?.days === 0 &&
+      timerToRender?.timeRemaining?.hours === 0 &&
+      timerToRender?.timeRemaining?.minutes === 0
+    ) {
+      // delete timer
       dispatch(deleteTimer({ deleteId: todoId }));
     }
   }, [timerToRender]);
@@ -102,7 +114,10 @@ export const CountDownTimer = ({ todoId }) => {
         <input id="minutes" name="minutes" type="number" ref={inputMinutes} />
         <br />
         <button type="button" onClick={onStartTimerClicked}>
-          Start To-do
+          Start To-do Timer
+        </button>
+        <button type="button" onClick={onDeleteTimerClicked}>
+          Delete To-do Timer
         </button>
       </form>
     </div>

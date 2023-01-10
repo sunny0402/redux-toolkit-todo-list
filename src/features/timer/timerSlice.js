@@ -45,7 +45,9 @@ const convertSeconds = (seconds) => {
   result.hours = Math.floor(seconds / 3600);
   seconds -= result.hours * 3600;
 
-  result.minutes = Math.floor(seconds / 60);
+  //Note: Will display 1 minute remaining until seconds remaining is zero.
+  // Math.ceil(0 / 60): 0
+  result.minutes = Math.ceil(seconds / 60);
   seconds -= result.minutes * 60;
 
   return result;
@@ -116,14 +118,6 @@ const timerSlice = createSlice({
       }
     },
 
-    pauseTimer(state, action) {
-      const { id } = action.payload;
-      const timerToPause = state.find((a_timer) => a_timer.id === id);
-      if (timerToPause) {
-        timerToPause.isRunning = false;
-      }
-    },
-
     deleteTimer(state, action) {
       const { deleteId } = action.payload;
       return state.filter((a_timer) => a_timer.id !== deleteId);
@@ -131,9 +125,6 @@ const timerSlice = createSlice({
   },
 });
 
-console.log("timerSlice.js: \n", timerSlice);
-
-export const { startTimer, updateTimer, pauseTimer, deleteTimer } =
-  timerSlice.actions;
+export const { startTimer, updateTimer, deleteTimer } = timerSlice.actions;
 
 export default timerSlice.reducer;
