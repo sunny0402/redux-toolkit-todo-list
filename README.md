@@ -210,6 +210,15 @@ From the docs:https://redux.js.org/tutorials/essentials/part-4-using-data
 Put as little info in action as possibel to describe action.
 it's always better to keep the action objects as small as possible, and do the state update calculations in the reducer. This also means that reducers can contain as much logic as necessary to calculate the new state.
 
+Our timer works, but not very useful. Let's make the time remaining a date.
+
+{
+id: "456",
+duration: 0,
+isRunning: false,
+dateCreated: "2023-01-09T01:06:58.699Z",
+},
+
 TodoList.js
 
 ```
