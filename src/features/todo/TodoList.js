@@ -7,13 +7,30 @@ import { CountDownTimer } from "../timer/CountDownTimer";
 
 export const TodoList = () => {
   const theTodos = useSelector((state) => state.todo);
+  const theTodoTimers = useSelector((state) => state.timer);
 
   const dispatch = useDispatch();
   const handleDelete = (deleteId) => {
     dispatch(deleteTodo({ deleteId }));
   };
+  // Note:
+  // a negative value if a should be sorted before b
+  // a positive value if a should be sorted after b
+  // 0 if a and b are equal and their order doesn't matter
 
-  const renderedTodos = theTodos.map((a_todo) => (
+  const orderedTodos = theTodos.slice().sort((a, b) => {
+    const timerA = theTodoTimers.find((t) => t.id === a.id);
+    const timerB = theTodoTimers.find((t) => t.id === b.id);
+
+    if (!timerA?.dueDate) return 1;
+    if (!timerB?.dueDate) return -1;
+
+    // Sort the todos on timer.dueDate
+    return timerA.dueDate.localeCompare(timerB.dueDate);
+  });
+
+  const sortedTodos = orderedTodos.map((a_todo) => (
+    //Test
     <article className="todo-article-container" key={a_todo.id}>
       <h3>{a_todo.title}</h3>
       <h4>{a_todo.category}</h4>
@@ -29,7 +46,7 @@ export const TodoList = () => {
     <div className="app-container-div">
       <section>
         <h2>My Todos</h2>
-        {renderedTodos}
+        {sortedTodos}
       </section>
     </div>
   );

@@ -230,70 +230,12 @@ import { CountDownTimer } from "../timer/CountDownTimer";
 
 ```
 
-TimeTodo.js
+# Sort Todos
 
-```
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setTime } from './timeSlice';
+From the docs: https://redux.js.org/tutorials/essentials/part-4-using-data
+const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
-function Time() {
-  const [duration, setDuration] = useState(0); // added this line
-  //get time from seperate slice of state
-  const time = useSelector(state => state.time.currentTime);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDuration(duration - 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [duration]); // added this line
-
-  function handleSetTime(event) {
-    event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
-    const newDuration = data.get("duration");
-    setDuration(newDuration);
-  }
-
-  return (
-    <div>
-      <p>The countdown timer is at: {duration} seconds</p>
-      <form onSubmit={handleSetTime}>
-        <label htmlFor="duration">Enter duration in seconds:</label>
-        <input id="duration" name="duration" type="number" />
-        <button type="submit">Set Time</button>
-      </form>
-    </div>
-  );
-}
-
-export default Time;
-```
-
-posts/TimeAgo
-
-```
-import React from 'react'
-import { parseISO, formatDistanceToNow } from 'date-fns'
-
-export const TimeAgo = ({ timestamp }) => {
-  let timeAgo = ''
-  if (timestamp) {
-    const date = parseISO(timestamp)
-    const timePeriod = formatDistanceToNow(date)
-    timeAgo = `${timePeriod} ago`
-  }
-
-  return (
-    <span title={timestamp}>
-      &nbsp; <i>{timeAgo}</i>
-    </span>
-  )
-}
-```
+# Category Dropdown
 
 # Possible to refactor dispatch
 

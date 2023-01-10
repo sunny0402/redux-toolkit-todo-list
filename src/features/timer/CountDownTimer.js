@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { startTimer, updateTimer, pauseTimer, deleteTimer } from "./timerSlice";
+import { startTimer, updateTimer, deleteTimer } from "./timerSlice";
 // import { addWeeks, addDays, addHours, addMinutes } from "date-fns";
 
 export const CountDownTimer = ({ todoId }) => {
