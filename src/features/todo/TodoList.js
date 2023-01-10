@@ -29,7 +29,7 @@ export const TodoList = () => {
     return timerA.dueDate.localeCompare(timerB.dueDate);
   });
 
-  const sortedTodos = orderedTodos.map((a_todo) => (
+  const renderedTodos = orderedTodos.map((a_todo) => (
     //Test
     <article className="todo-article-container" key={a_todo.id}>
       <h3>{a_todo.title}</h3>
@@ -46,7 +46,7 @@ export const TodoList = () => {
     <div className="app-container-div">
       <section>
         <h2>My Todos</h2>
-        {sortedTodos}
+        {renderedTodos}
       </section>
     </div>
   );

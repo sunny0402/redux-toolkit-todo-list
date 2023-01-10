@@ -5,6 +5,7 @@ html {
   font-weight: bold;
   /* overflow: hidden; */
 }
+
 .app-container-div {
   min-height: 100vh;
   display: flex;
