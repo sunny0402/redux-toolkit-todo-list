@@ -54,7 +54,7 @@ export const AddTodoForm = () => {
           onChange={onNotesChanged}
         />
         <label htmlFor="todoNotes">Category:</label>
-        <textarea
+        <input
           id="todoCategory"
           name="todoCategory"
           value={category}

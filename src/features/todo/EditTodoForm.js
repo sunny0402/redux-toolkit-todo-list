@@ -59,7 +59,7 @@ export const EditTodoForm = () => {
           onChange={onNotesChanged}
         />
         <label htmlFor="todoNotes">Update Category:</label>
-        <textarea
+        <input
           id="todoCategory"
           name="todoCategory"
           value={category}

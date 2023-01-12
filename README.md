@@ -245,3 +245,51 @@ Right now our individual components are required to know about all the data to u
 Can move this logic to todoSlice.js.
 
 https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
+
+# Final Steps
+
+Add CSS
+
+Create a seperate page for each todo timer form.
+
+```
+<Route path="/timer/:todoId" element={<CountDownTimer />} />
+```
+
+And in the to-do list render a link to the timer:
+
+```
+<Link to={`/timer/${a_todo.id}`} className="link-btn">
+To-do Timer
+</Link>
+```
+
+Update TodoList component:
+
+```
+  // Get all running timers. Will pass these to useEffect to update them.
+  const allRunningTimers = theTodoTimers
+    .filter((a_timer) => a_timer.isRunning === true)
+    .reduce((hashMap, runningTimer) => {
+      hashMap[runningTimer.id] = runningTimer;
+      return hashMap;
+    }, {});
+
+  //Update timer state
+  useEffect(() => {
+    let interval = null;
+    interval = setInterval(() => {
+      for (let timerID in allRunningTimers) {
+        console.log("timerID: ", timerID);
+        console.log("allRunningTimers[timerID]: ", allRunningTimers[timerID]);
+
+        dispatch(
+          updateTimer({
+            id: timerID,
+          })
+        );
+      }
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [theTodoTimers]);
+```

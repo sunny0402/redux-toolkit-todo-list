@@ -12,20 +12,24 @@ export const SingleTodoPage = () => {
   );
   if (!theTodo) {
     return (
-      <section>
-        <h2>To-do not found.</h2>
+      <section className="single-todo-container">
+        <div className="single-todo-div">
+          <h2>To-do not found.</h2>
+        </div>
       </section>
     );
   } else {
     return (
       <section className="single-todo-container">
-        <article key={theTodo.id}>
-          <h3>Title: {theTodo.title}</h3>
-          <h4>Category: {theTodo.category}</h4>
-          <h4>Id: {theTodo.id}</h4>
-          <p className="todo-note">Notes: {theTodo.notes}</p>
-          <Link to={`/editTodo/${todoId}`}>Edit this to-do</Link>
-        </article>
+        <div className="single-todo-div">
+          <article key={theTodo.id}>
+            <h3>Title: {theTodo.title}</h3>
+            <h4>Category: {theTodo.category}</h4>
+            <h4>Id: {theTodo.id}</h4>
+            <p className="todo-note">Notes: {theTodo.notes}</p>
+            <Link to={`/editTodo/${todoId}`}>Edit this to-do</Link>
+          </article>
+        </div>
       </section>
     );
   }

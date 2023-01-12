@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { startTimer, updateTimer, deleteTimer } from "./timerSlice";
-// import { addWeeks, addDays, addHours, addMinutes } from "date-fns";
+import { useParams } from "react-router-dom";
 
-export const CountDownTimer = ({ todoId }) => {
+// Test
+// export const CountDownTimer = ({ todoId }) => {
+export const CountDownTimer = () => {
+  let params = useParams();
+  const { todoId } = params;
+
   const inputWeeks = useRef(null);
   const inputDays = useRef(null);
   const inputHours = useRef(null);
@@ -70,8 +75,6 @@ export const CountDownTimer = ({ todoId }) => {
       }
     }, 10000);
     return () => clearInterval(interval);
-    // Test
-    // }, []);
   }, [timerToRender]);
 
   //   Note: Delete timer once timerToRender.timeRemaining.minutes === 0
@@ -92,10 +95,10 @@ export const CountDownTimer = ({ todoId }) => {
     <div className="duration-container">
       {timerToRender?.timeRemaining ? (
         <p>
-          Weeks: {timerToRender.timeRemaining.weeks}
-          Days: {timerToRender.timeRemaining.days}
-          Hours: {timerToRender.timeRemaining.hours}
-          Minutes: {timerToRender.timeRemaining.minutes}
+          Weeks:&nbsp; {timerToRender.timeRemaining.weeks}&nbsp; Days:&nbsp;
+          {timerToRender.timeRemaining.days}&nbsp; Hours: &nbsp;
+          {timerToRender.timeRemaining.hours}&nbsp; Minutes:&nbsp;
+          {timerToRender.timeRemaining.minutes}&nbsp;
         </p>
       ) : (
         <p>Start the to-do timer.</p>
