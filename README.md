@@ -17,5 +17,5 @@ final-steps branch contains the complete projected.
 
 # Inspired by other great Redux toolkit tutorials:
 
-1. Redux Essentials https://redux.js.org/tutorials/essentials/part-1-overview-concepts
-2. React Redux Full Course for Beginners https://www.youtube.com/watch?v=NqzdVN2tyvQ&list=PL0Zuz27SZ-6M1J5I1w2-uZx36Qp6qhjKo&index=9
+1. Redux Essentials (Official docs) https://redux.js.org/tutorials/essentials/part-1-overview-concepts
+2. React Redux Full Course for Beginners (Dave Gray Youtube tutorial) https://www.youtube.com/watch?v=NqzdVN2tyvQ&list=PL0Zuz27SZ-6M1J5I1w2-uZx36Qp6qhjKo&index=9
