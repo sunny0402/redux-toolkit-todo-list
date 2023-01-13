@@ -6,6 +6,10 @@ Follow me: @sunny_codes
 
 The purpose of this tutorial is to make Redux less intimidating and get you started as fast as possible.
 
+We build a to-do list app with countdown timers. Several routes and multiple features.
+
+Final app looks like: https://sunnycodestodolist.netlify.app/
+
 # View branches of this repo to follow step by step.
 
 1.  first-steps
