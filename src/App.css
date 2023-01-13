@@ -78,7 +78,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
 }
 
 .single-todo-div {
@@ -86,7 +86,7 @@ form {
   align-items: center;
   justify-content: center;
   background-color: var(--lighter-background);
-  width: 40%;
+  width: 75%;
   box-shadow: 1px 1px 10px 4px var(--shadow-color);
   border-radius: 8px;
   padding: 20px;
