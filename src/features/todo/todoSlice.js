@@ -34,6 +34,7 @@ const todoSlice = createSlice({
 });
 
 console.log("todoSlice.js: \n", todoSlice);
+
 export const { createTodo, updateTodo, deleteTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -5,7 +5,6 @@ import { nanoid } from "@reduxjs/toolkit";
 import { createTodo } from "./todoSlice";
 
 export const AddTodoForm = () => {
-  // 123
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [category, setCategory] = useState("");
